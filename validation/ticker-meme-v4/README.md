@@ -1,8 +1,9 @@
 # Consolidated TickerMemeHook execution evidence
 
 This archive validates the `ticker-meme-v4` integration at Go commit
-`b5c0e1f30223ad8b8f09bacb7bde4b1b93b64491`. It contains execution evidence and an adapter patch,
-separate from the integration PR.
+`087aaffa61b5fdd2d8538e2bad4700e4e9f66d6b`. It contains execution evidence and an adapter patch,
+separate from the integration PR. This revision rechecks the atomic JSON decoding
+fix and records successful Go unit, race, vet and full-build checks.
 
 - Monad fork block: `112288351`.
 - Contracts harness base: `e068291086e8e32dfcba29268536f00b124ca8ef` in `jaybutera/ponsfamily` (access required).
@@ -20,7 +21,7 @@ Use fresh checkouts to reproduce:
 
 ```sh
 git clone --no-checkout https://github.com/14degrees/kyberswap-dex-lib.git ticker-meme-go
-git -C ticker-meme-go checkout b5c0e1f30223ad8b8f09bacb7bde4b1b93b64491
+git -C ticker-meme-go checkout 087aaffa61b5fdd2d8538e2bad4700e4e9f66d6b
 git clone --no-checkout https://github.com/jaybutera/ponsfamily.git ticker-meme-harness
 git -C ticker-meme-harness checkout e068291086e8e32dfcba29268536f00b124ca8ef
 git -C ticker-meme-harness submodule update --init --recursive

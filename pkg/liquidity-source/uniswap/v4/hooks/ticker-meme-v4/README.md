@@ -18,8 +18,9 @@ describe how an afterSwap return adjusts the swapper's balance.
 | PoolManager | [`0x188d586ddcf52439676ca21a244753fa19f9ea8e`](https://monadvision.com/address/0x188d586ddcf52439676ca21a244753fa19f9ea8e) |
 
 The proxy enables beforeInitialize, afterSwap and afterSwapReturnDelta
-(`0x2044`). The implementation's runtime hash, proxy runtime hash and snapshot
-block/hash are recorded in [testdata/deployment.json](testdata/deployment.json).
+(`0x2044`). The implementation and proxy runtime hashes are pinned in
+`constant.go`; the original deployment read is retained in the
+[validation archive](https://github.com/14degrees/kyberswap-dex-lib/tree/6849e5efe04f29a51f4c2885eb05ac040adeaf14/pkg/liquidity-source/uniswap/v4/hooks/ticker-meme-v4/testdata).
 At block **112361144**, the proxy's `factory()` was still zero. The fork harness
 wires it and creates new pools only inside its local fork. The recorded trades
 are local fork executions, not production transactions.
@@ -62,7 +63,7 @@ TICKER_MEME_RPC=https://rpc.monad.xyz go test ./pkg/liquidity-source/uniswap/v4/
 go generate ./pkg/msgpack/...
 ```
 
-[testdata/fork-quotes.json](testdata/fork-quotes.json) contains sixteen sequential
+[fork_quotes_test.go](fork_quotes_test.go) keeps sixteen captured sequential
 swaps on the real Monad PoolManager and deployed hook at block 112361144: ERC-20
 and native pairs, both directions, creator tax 0/100/133 bps, fee dust and zero
 fees. Go tests compare outputs, sqrt prices and ticks exactly after every trade.
@@ -71,20 +72,24 @@ minimum input through rounding dips and skipped gross output values. RPC tests
 cover block pinning, overrides and upgrade rejection. Serialization tests cover
 forward and reverse quotes after a full simulator round trip.
 
+The Solidity harness and raw captures are retained at validation commit
+`6849e5efe04f29a51f4c2885eb05ac040adeaf14`, outside this PR's final tree.
 To reproduce the contract executions, check out the Ticker contract reference
-above in a separate directory, then run:
+above in a separate directory, then use a separate validation checkout:
 
 ```sh
+git clone --no-checkout https://github.com/14degrees/kyberswap-dex-lib.git ticker-meme-validation
+git -C ticker-meme-validation checkout 6849e5efe04f29a51f4c2885eb05ac040adeaf14
 TICKER_SOURCE=/absolute/path/to/ticker-contracts \
 TICKER_MEME_RPC=https://rpc.monad.xyz \
-sh pkg/liquidity-source/uniswap/v4/hooks/ticker-meme-v4/testdata/solidity/run.sh
+sh ticker-meme-validation/pkg/liquidity-source/uniswap/v4/hooks/ticker-meme-v4/testdata/solidity/run.sh
 ```
 
 The harness uses Foundry and Solidity 0.8.30. It writes four small scenario JSON
 files next to itself; combine them in ERC-20, native, rounding, zero-fees order
 to reproduce the fixture. Token contracts and pool liquidity are local test
-fixtures. The testdata module keeps the harness and runtime fixture out of
-downstream Go module downloads.
+fixtures. The final integration includes compact Go test tables, with no
+`testdata` directory, Solidity tooling or runtime dump.
 
 The model adds a conservative **100,000 gas** allowance when a fee is taken.
 Recorded ERC-20 fork trades show up to 91,698 extra gas versus zero-fee trades

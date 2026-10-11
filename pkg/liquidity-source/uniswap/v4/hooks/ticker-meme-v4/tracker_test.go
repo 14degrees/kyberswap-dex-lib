@@ -5,7 +5,6 @@ import (
 	"math/big"
 	"net/http/httptest"
 	"os"
-	"strings"
 	"testing"
 
 	"github.com/KyberNetwork/ethrpc"
@@ -66,21 +65,17 @@ func (s *trackingRPC) Call(_ context.Context, call map[string]json.RawMessage, b
 	return s.output, nil
 }
 
-func implementationCode(t *testing.T) []byte {
-	t.Helper()
-	file, err := os.ReadFile("testdata/implementation.hex")
-	require.NoError(t, err)
-	code, err := hexutil.Decode(strings.TrimSpace(string(file)))
-	require.NoError(t, err)
-	require.Equal(t, ImplementationCodeHash, crypto.Keccak256Hash(code))
-	return code
-}
-
 func trackContext(t *testing.T) (*Hook, *uniswapv4.HookParam, *trackingRPC) {
 	t.Helper()
+	// Use a tiny mock runtime for serial RPC tests; the live test checks the real
+	// deployment hash without requiring a checked-in bytecode dump.
+	code := []byte{0x60, 0x00, 0x60, 0x00, 0xf3}
+	originalHash := ImplementationCodeHash
+	ImplementationCodeHash = crypto.Keccak256Hash(code)
+	t.Cleanup(func() { ImplementationCodeHash = originalHash })
 	output, err := hookABI.Methods["launches"].Outputs.Pack(true, false, common.HexToAddress("0xf000000000000000000000000000000000000000"), common.Address{}, common.Address{}, common.Address{}, common.Address{}, uint16(133), uint16(3000), uint16(5000), uint16(100), uint16(300), true)
 	require.NoError(t, err)
-	service := &trackingRPC{t: t, implementation: ImplementationAddress, code: implementationCode(t), output: output}
+	service := &trackingRPC{t: t, implementation: ImplementationAddress, code: code, output: output}
 	server := rpc.NewServer()
 	require.NoError(t, server.RegisterName("eth", service))
 	httpServer := httptest.NewServer(server)
@@ -110,7 +105,7 @@ func TestTrackOverridesAndInvalidSnapshots(t *testing.T) {
 	h, param, service := trackContext(t)
 	param.Overrides = map[common.Address]gethclient.OverrideAccount{
 		HookAddress:           {StateDiff: map[common.Hash]common.Hash{implementationSlot: common.BytesToHash(ImplementationAddress.Bytes())}},
-		ImplementationAddress: {Code: implementationCode(t)},
+		ImplementationAddress: {Code: service.code},
 	}
 	service.expectOverrides = true
 	_, err := h.Track(context.Background(), param)

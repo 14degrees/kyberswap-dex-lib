@@ -1,0 +1,633 @@
+{
+  "forkBlock": 112288351,
+  "venues": [
+    "ticker-memehook"
+  ],
+  "harnessCommit": "e068291086e8e32dfcba29268536f00b124ca8ef",
+  "harnessPatchSha256": "1bfcc7f50b660e33cf098d2bd6fc7eb25d0c216698b6aa7b4ca66e1ce9f17222",
+  "goCommit": "b5c0e1f30223ad8b8f09bacb7bde4b1b93b64491",
+  "goWorktreeChanges": "",
+  "bridgeSourceSha256": {
+    "ticker-memehook": "b4d91491e5be027daf2ca349cbb7c7c61a35b49ba54092d0d9282f4c10aeb5e0"
+  },
+  "goPatchSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "codePins": [
+    {
+      "chainId": 143,
+      "block": 111136692,
+      "contracts": [
+        {
+          "name": "router",
+          "address": "0x6131b5fae19ea4f9d964eac0408e4408b66337b5",
+          "codeHash": "0x73055c10f463ef7d44c444ccae0b71ab4cacaf67aedbad2cd8af639d53cc6316"
+        },
+        {
+          "name": "executor",
+          "address": "0x8f10b468b06c6fd214b65f87778827f7d113f996",
+          "codeHash": "0xc3fe18bd9e1e31adecfcaba58177f3d796c3028e7d53a628e321e18295e10682"
+        },
+        {
+          "name": "implementation",
+          "address": "0x4f1423cce26c09fb31d96eafe702fc5e22421f6a",
+          "codeHash": "0xb80c4905fac58dc691098cf3df4fedccb13ece3006eaf4f57fde8d3057da1a9f"
+        },
+        {
+          "name": "adapter",
+          "address": "0x069c11bfc769be175bfae2d20bddce34e46514cc",
+          "codeHash": "0x545e3011d035ba82f8d6606cccafb94409fc4b6ef530d1e08f4933d788f9a356"
+        },
+        {
+          "name": "callback",
+          "address": "0x7b0e2e8300899b647d5ebc66f9d4fa3f16c54061",
+          "codeHash": "0x2341b9d149017244dde869c1ddaabf0ff7f7b0eb53b6f3af6ac4564b536ed6e0"
+        }
+      ]
+    },
+    {
+      "chainId": 143,
+      "block": 112288351,
+      "contracts": [
+        {
+          "name": "DualPool proxy",
+          "address": "0x047ea2f55148b7601fdde0d28588b55c09192ac4",
+          "codeHash": "0x824a513357c89e28b2b23a5d727a23bdb3b69db732883d999165af4e064e3120"
+        },
+        {
+          "name": "DualPool implementation",
+          "address": "0x844a14bae1b67df6064bb87ba5ff941dc02649e0",
+          "codeHash": "0xc812006c87f88e3056cc31a5bb39a4b64fa011a23c718923f29f949f53b55eb0"
+        },
+        {
+          "name": "Meme proxy",
+          "address": "0x223f8b1b43aeec86d2659cce36169f72f7fc2044",
+          "codeHash": "0x824a513357c89e28b2b23a5d727a23bdb3b69db732883d999165af4e064e3120"
+        },
+        {
+          "name": "Meme implementation",
+          "address": "0x2d96e4e89d37551ff55eb9cfead78da1278d5986",
+          "codeHash": "0x94a20f9305eeae246d3ec31488868fc17f81caf4a7ad2b05f528d04c55c4c382"
+        }
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "name": "test_GoDeployedMemeBuyAndSellWithoutTax",
+      "passed": true,
+      "command": [
+        "forge",
+        "test",
+        "--ffi",
+        "--threads",
+        "1",
+        "--memory-limit",
+        "536870912",
+        "--gas-limit",
+        "64000000000",
+        "--match-contract",
+        "^KyberMainnetMemeGoQuoteTest$",
+        "--match-test",
+        "^test_GoDeployedMemeBuyAndSellWithoutTax\\(",
+        "-vv"
+      ],
+      "forgeRouterCallGas": [
+        239415,
+        215957
+      ],
+      "quotes": [
+        {
+          "request": {
+            "amountIn": "10000000",
+            "block": 112288356,
+            "desiredOut": "0",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb1b474ff88bd9de734c47c014e61b8c40d6591852b887588cc7d3dd5467d4f81",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "token1": "0xbcc00D54aA0a971Ce2F2a251927e1D142229cfb5",
+            "tokenIn": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "0",
+            "hookFee": "2034704058936176743862",
+            "input": "10000000",
+            "liquidity": "1428571428755102040",
+            "output": "201435701834681497642430",
+            "sqrtPriceX96": "11307024519332703291180591894887454756",
+            "tick": "375545"
+          }
+        },
+        {
+          "request": {
+            "amountIn": "100717850917340748821215",
+            "block": 112288356,
+            "desiredOut": "0",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb1b474ff88bd9de734c47c014e61b8c40d6591852b887588cc7d3dd5467d4f81",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "token1": "0xbcc00D54aA0a971Ce2F2a251927e1D142229cfb5",
+            "tokenIn": "0xbcc00D54aA0a971Ce2F2a251927e1D142229cfb5",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "0",
+            "hookFee": "49327",
+            "input": "100717850917340748821215",
+            "liquidity": "1428571428755102040",
+            "output": "4883381",
+            "sqrtPriceX96": "11312599130948018326516047757303350981",
+            "tick": "375555"
+          }
+        }
+      ]
+    },
+    {
+      "name": "test_GoDeployedMemeBuyAndSellWithTax",
+      "passed": true,
+      "command": [
+        "forge",
+        "test",
+        "--ffi",
+        "--threads",
+        "1",
+        "--memory-limit",
+        "536870912",
+        "--gas-limit",
+        "64000000000",
+        "--match-contract",
+        "^KyberMainnetMemeGoQuoteTest$",
+        "--match-test",
+        "^test_GoDeployedMemeBuyAndSellWithTax\\(",
+        "-vv"
+      ],
+      "forgeRouterCallGas": [
+        259238,
+        235855
+      ],
+      "quotes": [
+        {
+          "request": {
+            "amountIn": "10000000",
+            "block": 112288356,
+            "desiredOut": "0",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb07ebdba0c3eefee53789be0eca7b73d798185fb5670198c1586258850cffd45",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "token1": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "tokenIn": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "2706156398385115068445",
+            "hookFee": "2034704058936176743192",
+            "input": "10000000",
+            "liquidity": "1428571428755102040",
+            "output": "198729545436296382507608",
+            "sqrtPriceX96": "555150625582717932337",
+            "tick": "-375546"
+          }
+        },
+        {
+          "request": {
+            "amountIn": "99364772718148191253804",
+            "block": 112288356,
+            "desiredOut": "0",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb07ebdba0c3eefee53789be0eca7b73d798185fb5670198c1586258850cffd45",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "token1": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "tokenIn": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "64724",
+            "hookFee": "48664",
+            "input": "99364772718148191253804",
+            "liquidity": "1428571428755102040",
+            "output": "4753084",
+            "sqrtPriceX96": "554880732397224368528",
+            "tick": "-375556"
+          }
+        }
+      ]
+    },
+    {
+      "name": "test_GoDeployedMemeRepeatedTrades",
+      "passed": true,
+      "command": [
+        "forge",
+        "test",
+        "--ffi",
+        "--threads",
+        "1",
+        "--memory-limit",
+        "536870912",
+        "--gas-limit",
+        "64000000000",
+        "--match-contract",
+        "^KyberMainnetMemeGoQuoteTest$",
+        "--match-test",
+        "^test_GoDeployedMemeRepeatedTrades\\(",
+        "-vv"
+      ],
+      "forgeRouterCallGas": [
+        260166,
+        236035,
+        133687,
+        135514,
+        133706,
+        136566
+      ],
+      "quotes": [
+        {
+          "request": {
+            "amountIn": "1000000",
+            "block": 112288356,
+            "desiredOut": "0",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb07ebdba0c3eefee53789be0eca7b73d798185fb5670198c1586258850cffd45",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "token1": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "tokenIn": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "270858682550503189142",
+            "hookFee": "203653144774814427926",
+            "input": "1000000",
+            "liquidity": "1428571428755102040",
+            "output": "19890802650156125175581",
+            "sqrtPriceX96": "554652486433789793202",
+            "tick": "-375564"
+          }
+        },
+        {
+          "request": {
+            "amountIn": "9945401325078062587790",
+            "block": 112288356,
+            "desiredOut": "0",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb07ebdba0c3eefee53789be0eca7b73d798185fb5670198c1586258850cffd45",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "token1": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "tokenIn": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "6469",
+            "hookFee": "4864",
+            "input": "9945401325078062587790",
+            "liquidity": "1428571428755102040",
+            "output": "475090",
+            "sqrtPriceX96": "554625509529243812373",
+            "tick": "-375565"
+          }
+        },
+        {
+          "request": {
+            "amountIn": "100000000",
+            "block": 112288356,
+            "desiredOut": "0",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb07ebdba0c3eefee53789be0eca7b73d798185fb5670198c1586258850cffd45",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "token1": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "tokenIn": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "26818168432219162793778",
+            "hookFee": "20164036415202378040435",
+            "input": "100000000",
+            "liquidity": "1428571428755102040",
+            "output": "1969421436672816263209308",
+            "sqrtPriceX96": "560160388961778691644",
+            "tick": "-375367"
+          }
+        },
+        {
+          "request": {
+            "amountIn": "984710718336408131604654",
+            "block": 112288356,
+            "desiredOut": "0",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb07ebdba0c3eefee53789be0eca7b73d798185fb5670198c1586258850cffd45",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "token1": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "tokenIn": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "650203",
+            "hookFee": "488874",
+            "input": "984710718336408131604654",
+            "liquidity": "1428571428755102040",
+            "output": "47748403",
+            "sqrtPriceX96": "557449103290992924527",
+            "tick": "-375464"
+          }
+        },
+        {
+          "request": {
+            "amountIn": "1000000000",
+            "block": 112288356,
+            "desiredOut": "0",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb07ebdba0c3eefee53789be0eca7b73d798185fb5670198c1586258850cffd45",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "token1": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "tokenIn": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "243903965819216883378069",
+            "hookFee": "183386440465576604043661",
+            "input": "1000000000",
+            "liquidity": "1428571428755102040",
+            "output": "17911353640272866916944416",
+            "sqrtPriceX96": "612797897616341717245",
+            "tick": "-373570"
+          }
+        },
+        {
+          "request": {
+            "amountIn": "8955676820136433458472208",
+            "block": 112288356,
+            "desiredOut": "0",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb07ebdba0c3eefee53789be0eca7b73d798185fb5670198c1586258850cffd45",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "token1": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "tokenIn": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "6783169",
+            "hookFee": "5100127",
+            "input": "8955676820136433458472208",
+            "liquidity": "1428571428755102040",
+            "output": "498129452",
+            "sqrtPriceX96": "584512736555693925501",
+            "tick": "-374516"
+          }
+        }
+      ]
+    },
+    {
+      "name": "test_GoDeployedMemeRoundTrip",
+      "passed": true,
+      "command": [
+        "forge",
+        "test",
+        "--ffi",
+        "--threads",
+        "1",
+        "--memory-limit",
+        "536870912",
+        "--gas-limit",
+        "64000000000",
+        "--match-contract",
+        "^KyberMainnetMemeGoQuoteTest$",
+        "--match-test",
+        "^test_GoDeployedMemeRoundTrip\\(",
+        "-vv"
+      ],
+      "forgeRouterCallGas": [],
+      "quotes": [
+        {
+          "request": {
+            "amountIn": "10000000",
+            "block": 112288356,
+            "desiredOut": "0",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb07ebdba0c3eefee53789be0eca7b73d798185fb5670198c1586258850cffd45",
+            "roundTrip": true,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "token1": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "tokenIn": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "2706156398385115068445",
+            "hookFee": "2034704058936176743192",
+            "input": "10000000",
+            "liquidity": "1428571428755102040",
+            "output": "198729545436296382507608",
+            "second_creatorTax": "129385",
+            "second_hookFee": "97282",
+            "second_input": "198729545436296382507608",
+            "second_liquidity": "1428571428755102040",
+            "second_output": "9501549",
+            "second_sqrtPriceX96": "554611101507879810555",
+            "second_tick": "-375566",
+            "sqrtPriceX96": "555150625582717932337",
+            "tick": "-375546"
+          }
+        }
+      ]
+    },
+    {
+      "name": "test_GoDeployedMemeReverseQuotesBothDirections",
+      "passed": true,
+      "command": [
+        "forge",
+        "test",
+        "--ffi",
+        "--threads",
+        "1",
+        "--memory-limit",
+        "536870912",
+        "--gas-limit",
+        "64000000000",
+        "--match-contract",
+        "^KyberMainnetMemeGoQuoteTest$",
+        "--match-test",
+        "^test_GoDeployedMemeReverseQuotesBothDirections\\(",
+        "-vv"
+      ],
+      "forgeRouterCallGas": [
+        260134,
+        235887
+      ],
+      "quotes": [
+        {
+          "request": {
+            "amountIn": "0",
+            "block": 112288356,
+            "desiredOut": "100000000000000000000000",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb07ebdba0c3eefee53789be0eca7b73d798185fb5670198c1586258850cffd45",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "token1": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "tokenIn": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "1361728320829503864617",
+            "hookFee": "1023855880322935236554",
+            "input": "5029471",
+            "liquidity": "1428571428755102040",
+            "output": "100000003831141084554269",
+            "sqrtPriceX96": "554875512792192087330",
+            "tick": "-375556"
+          }
+        },
+        {
+          "request": {
+            "amountIn": "0",
+            "block": 112288356,
+            "desiredOut": "1000000",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb07ebdba0c3eefee53789be0eca7b73d798185fb5670198c1586258850cffd45",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "token1": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "tokenIn": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "13617",
+            "hookFee": "10238",
+            "input": "20918012026332034595907",
+            "liquidity": "1428571428755102040",
+            "output": "1000000",
+            "sqrtPriceX96": "554818730086967658484",
+            "tick": "-375558"
+          }
+        }
+      ]
+    },
+    {
+      "name": "test_GoDeployedMemeRejectsOverstatedQuote",
+      "passed": true,
+      "command": [
+        "forge",
+        "test",
+        "--ffi",
+        "--threads",
+        "1",
+        "--memory-limit",
+        "536870912",
+        "--gas-limit",
+        "64000000000",
+        "--match-contract",
+        "^KyberMainnetMemeGoQuoteTest$",
+        "--match-test",
+        "^test_GoDeployedMemeRejectsOverstatedQuote\\(",
+        "-vv"
+      ],
+      "forgeRouterCallGas": [],
+      "quotes": [
+        {
+          "request": {
+            "amountIn": "10000000",
+            "block": 112288356,
+            "desiredOut": "0",
+            "fee": 2000,
+            "hook": "0x223F8B1b43AEEc86d2659cCe36169f72f7FC2044",
+            "poolId": "0xb07ebdba0c3eefee53789be0eca7b73d798185fb5670198c1586258850cffd45",
+            "roundTrip": false,
+            "tickSpacing": 200,
+            "timestamp": 1791667355,
+            "token0": "0x4441209024065F4FCd87cEd8e04dcebc64547172",
+            "token1": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "tokenIn": "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
+            "venue": "ticker-memehook"
+          },
+          "quote": {
+            "creatorTax": "2706156398385115068445",
+            "hookFee": "2034704058936176743192",
+            "input": "10000000",
+            "liquidity": "1428571428755102040",
+            "output": "198729545436296382507608",
+            "sqrtPriceX96": "555150625582717932337",
+            "tick": "-375546"
+          }
+        }
+      ]
+    }
+  ],
+  "integration": {
+    "package": "ticker-meme-v4",
+    "exchange": "ticker-meme-v4",
+    "serializationBeforeQuotes": true,
+    "nativeKyberExecutionCovered": false
+  },
+  "validation": {
+    "localDate": "2026-10-11",
+    "timezone": "America/New_York",
+    "goChecks": [
+      {
+        "command": "CI=true TICKER_MEME_RPC=https://rpc.monad.xyz go test ./pkg/liquidity-source/uniswap/v4/... ./pkg/msgpack ./pkg/pooltypes -count=1",
+        "passed": true,
+        "testedPackages": 34
+      },
+      {
+        "command": "CI=true go test -race ./pkg/liquidity-source/uniswap/v4/hooks/ticker-meme-v4 ./pkg/liquidity-source/uniswap/v4 ./pkg/msgpack -count=1",
+        "passed": true,
+        "testedPackages": 3
+      }
+    ],
+    "generation": {
+      "command": "go generate ./pkg/msgpack/...",
+      "passed": true,
+      "stable": true
+    },
+    "diffCheckPassed": true,
+    "tools": {
+      "go": "go version go1.25.10 darwin/arm64",
+      "forge": "forge Version: 1.5.1-stable\nCommit SHA: b0a9dd9ceda36f63e2326ce530c10e6916f4b8a2\nBuild Timestamp: 2025-12-22T11:41:09.812070000Z (1766403669)\nBuild Profile: maxperf",
+      "anvil": "anvil Version: 1.5.1-stable\nCommit SHA: b0a9dd9ceda36f63e2326ce530c10e6916f4b8a2\nBuild Timestamp: 2025-12-22T11:41:09.812070000Z (1766403669)\nBuild Profile: maxperf"
+    }
+  }
+}

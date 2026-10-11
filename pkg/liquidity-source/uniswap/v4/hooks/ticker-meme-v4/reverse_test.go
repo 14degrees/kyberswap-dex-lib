@@ -13,7 +13,7 @@ import (
 // catches binary searches that incorrectly assume net output never decreases.
 func TestReverseAgainstExhaustiveOracle(t *testing.T) {
 	for _, rates := range [][2]uint16{{0, 0}, {100, 100}, {100, 133}, {1000, 1000}, {1, 1999}} {
-		for _, step := range []int64{1, 2, 7} {
+		for _, step := range []int64{1, 2, 7, 20} {
 			h := &Hook{Extra: terms(rates[0], rates[1])}
 			grossQuote := func(param pool.CalcAmountOutParams) (*pool.CalcAmountOutResult, error) {
 				return &pool.CalcAmountOutResult{TokenAmountOut: &pool.TokenAmount{Token: "out", Amount: new(big.Int).Mul(param.TokenAmountIn.Amount, big.NewInt(step))}}, nil
@@ -41,6 +41,72 @@ func TestReverseAgainstExhaustiveOracle(t *testing.T) {
 				require.EqualValues(t, 123, result.Gas)
 				require.Equal(t, expected*step, result.SwapInfo)
 			}
+		}
+	}
+}
+
+// Check every smaller input, since input-1 alone cannot prove
+// minimum input when both separately rounded fees increase at the same boundary.
+func TestV4ReverseFindsFirstQualifyingInput(t *testing.T) {
+	unregistered := terms(100, 133)
+	unregistered.Registered = false
+	for _, extra := range []Extra{terms(0, 0), terms(100, 0), terms(100, 100), terms(100, 133), terms(1000, 1000), unregistered} {
+		for _, native := range []bool{false, true} {
+			for _, index := range []int{0, 1} {
+				p := newPool(t, extra, native)
+				in, out := p.Info.Tokens[index], p.Info.Tokens[1-index]
+				outputs := make([]*big.Int, 301)
+				for input := 1; input < len(outputs); input++ {
+					result, err := p.CalcAmountOut(pool.CalcAmountOutParams{TokenAmountIn: pool.TokenAmount{Token: in, Amount: big.NewInt(int64(input))}, TokenOut: out})
+					if err == nil {
+						outputs[input] = result.TokenAmountOut.Amount
+					}
+				}
+				for desired := int64(1); desired <= 200; desired++ {
+					want := big.NewInt(desired)
+					first := 0
+					for input, output := range outputs {
+						if output != nil && output.Cmp(want) >= 0 {
+							first = input
+							break
+						}
+					}
+					require.NotZero(t, first)
+					result, err := p.CalcAmountIn(pool.CalcAmountInParams{TokenIn: in, TokenAmountOut: pool.TokenAmount{Token: out, Amount: want}})
+					require.NoError(t, err)
+					require.EqualValues(t, first, result.TokenAmountIn.Amount.Int64(), "terms=%+v native=%t direction=%d desired=%d", extra, native, index, desired)
+					replay, err := p.CalcAmountOut(pool.CalcAmountOutParams{TokenAmountIn: *result.TokenAmountIn, TokenOut: out})
+					require.NoError(t, err)
+					require.Equal(t, replay.SwapInfo, result.SwapInfo)
+					require.Equal(t, replay.Fee, result.Fee)
+					require.Equal(t, replay.Gas, result.Gas)
+					require.Equal(t, big.NewInt(desired), want, "request must not be mutated")
+				}
+			}
+		}
+	}
+}
+
+func TestV4ReverseUpdatesLikeExactInput(t *testing.T) {
+	for _, native := range []bool{false, true} {
+		for _, index := range []int{0, 1} {
+			p := newPool(t, terms(100, 133), native)
+			in, out := p.Info.Tokens[index], p.Info.Tokens[1-index]
+			reverse, err := p.CalcAmountIn(pool.CalcAmountInParams{TokenIn: in, TokenAmountOut: pool.TokenAmount{Token: out, Amount: big.NewInt(123456789)}})
+			require.NoError(t, err)
+			forward, err := p.CalcAmountOut(pool.CalcAmountOutParams{TokenAmountIn: *reverse.TokenAmountIn, TokenOut: out})
+			require.NoError(t, err)
+			a, b := p.CloneState(), p.CloneState()
+			update := pool.UpdateBalanceParams{TokenAmountIn: *reverse.TokenAmountIn, TokenAmountOut: *forward.TokenAmountOut, SwapInfo: reverse.SwapInfo}
+			a.UpdateBalance(update)
+			update.SwapInfo = forward.SwapInfo
+			b.UpdateBalance(update)
+			next := pool.CalcAmountOutParams{TokenAmountIn: *forward.TokenAmountOut, TokenOut: in}
+			nextA, err := a.CalcAmountOut(next)
+			require.NoError(t, err)
+			nextB, err := b.CalcAmountOut(next)
+			require.NoError(t, err)
+			require.Equal(t, nextB, nextA)
 		}
 	}
 }

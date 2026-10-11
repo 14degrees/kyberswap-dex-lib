@@ -69,9 +69,10 @@ and native pairs, both directions, creator tax 0/100/133 bps, fee dust and zero
 fees. Go tests compare outputs, sqrt prices and ticks exactly after every trade.
 Reverse quotes also replay successfully; a separate exhaustive oracle tests
 minimum input through rounding dips and skipped gross output values. RPC tests
-cover block pinning, overrides and upgrade rejection. Generated msgpack bindings
-register the concrete hook type. The original validation commit also includes
-the simulator serialization round-trip test; that test is excluded from this PR.
+cover block pinning, overrides and upgrade rejection. V4 forward quotes also
+provide an exhaustive minimum-input oracle, and reverse SwapInfo updates are
+checked against the forward execution state. Generated msgpack bindings register
+the concrete hook type.
 
 The Solidity harness and raw captures are retained at validation commit
 `6849e5efe04f29a51f4c2885eb05ac040adeaf14`, outside this PR's final tree.
@@ -91,6 +92,19 @@ files next to itself; combine them in ERC-20, native, rounding, zero-fees order
 to reproduce the fixture. Token contracts and pool liquidity are local test
 fixtures. The final integration includes compact Go test tables, with no
 `testdata` directory, Solidity tooling or runtime dump.
+
+The external Kyber suite runs Go tracking and quoting against a loopback Anvil
+snapshot before the deployed Kyber router/executor executes each quote. It
+covers buy/sell with and without creator tax, repeated trades, a one-transaction
+round trip, reverse quotes in both directions, and complete rollback when the
+requested output exceeds the quote by one unit. Every scenario saves and loads
+the simulator through msgpack before quoting.
+
+The [consolidated validation report and harness patch](https://github.com/14degrees/kyberswap-dex-lib/tree/codex/ticker-meme-v4-validation/validation/ticker-meme-v4)
+record the exact Go commit, harness base/patch hashes, deployment code hashes and
+reproduction commands. This suite uses ERC-20 pairs; native PoolManager coverage
+comes from the sixteen captured swaps above. Harness code and execution reports
+are kept outside the integration diff.
 
 The model adds a conservative **100,000 gas** allowance when a fee is taken.
 Recorded ERC-20 fork trades show up to 91,698 extra gas versus zero-fee trades

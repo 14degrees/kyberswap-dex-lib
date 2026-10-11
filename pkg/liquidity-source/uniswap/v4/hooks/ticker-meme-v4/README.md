@@ -69,8 +69,9 @@ and native pairs, both directions, creator tax 0/100/133 bps, fee dust and zero
 fees. Go tests compare outputs, sqrt prices and ticks exactly after every trade.
 Reverse quotes also replay successfully; a separate exhaustive oracle tests
 minimum input through rounding dips and skipped gross output values. RPC tests
-cover block pinning, overrides and upgrade rejection. Serialization tests cover
-forward and reverse quotes after a full simulator round trip.
+cover block pinning, overrides and upgrade rejection. Generated msgpack bindings
+register the concrete hook type. The original validation commit also includes
+the simulator serialization round-trip test; that test is excluded from this PR.
 
 The Solidity harness and raw captures are retained at validation commit
 `6849e5efe04f29a51f4c2885eb05ac040adeaf14`, outside this PR's final tree.

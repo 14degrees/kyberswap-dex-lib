@@ -1,0 +1,262 @@
+[
+  {
+    "chainId": 143,
+    "forkBlock": 112361144,
+    "native": false,
+    "hookFeeBps": 100,
+    "creatorTaxBps": 133,
+    "liquidity": "1000000000000",
+    "lpFee": 2000,
+    "tickSpacing": 60,
+    "trades": [
+      {
+        "zeroForOne": true,
+        "input": "1000000",
+        "grossOutput": "997999",
+        "netOutput": "974747",
+        "hookFee": "9979",
+        "creatorTax": "13273",
+        "beforeSqrtPriceX96": "79228162514264337593543950336",
+        "beforeTick": 0,
+        "afterSqrtPriceX96": "79228083444637059845758224270",
+        "afterTick": -1,
+        "executionGas": 153821
+      },
+      {
+        "zeroForOne": false,
+        "input": "2000000",
+        "grossOutput": "1995999",
+        "netOutput": "1949494",
+        "hookFee": "19959",
+        "creatorTax": "26546",
+        "beforeSqrtPriceX96": "79228083444637059845758224270",
+        "beforeTick": -1,
+        "afterSqrtPriceX96": "79228241584049438317376060983",
+        "afterTick": 0,
+        "executionGas": 146640
+      },
+      {
+        "zeroForOne": true,
+        "input": "100",
+        "grossOutput": "99",
+        "netOutput": "98",
+        "hookFee": "0",
+        "creatorTax": "1",
+        "beforeSqrtPriceX96": "79228241584049438317376060983",
+        "beforeTick": 0,
+        "afterSqrtPriceX96": "79228241576205834573415146903",
+        "afterTick": 0,
+        "executionGas": 43837
+      },
+      {
+        "zeroForOne": false,
+        "input": "1000000000",
+        "grossOutput": "997003000",
+        "netOutput": "973772831",
+        "hookFee": "9970030",
+        "creatorTax": "13260139",
+        "beforeSqrtPriceX96": "79228241576205834573415146903",
+        "beforeTick": 0,
+        "afterSqrtPriceX96": "79307311282395070382333503765",
+        "afterTick": 19,
+        "executionGas": 45235
+      }
+    ],
+    "name": "erc20"
+  },
+  {
+    "chainId": 143,
+    "forkBlock": 112361144,
+    "native": true,
+    "hookFeeBps": 100,
+    "creatorTaxBps": 133,
+    "liquidity": "1000000000000",
+    "lpFee": 2000,
+    "tickSpacing": 60,
+    "trades": [
+      {
+        "zeroForOne": true,
+        "input": "1000000",
+        "grossOutput": "997999",
+        "netOutput": "974747",
+        "hookFee": "9979",
+        "creatorTax": "13273",
+        "beforeSqrtPriceX96": "79228162514264337593543950336",
+        "beforeTick": 0,
+        "afterSqrtPriceX96": "79228083444637059845758224270",
+        "afterTick": -1,
+        "executionGas": 155736
+      },
+      {
+        "zeroForOne": false,
+        "input": "2000000",
+        "grossOutput": "1995999",
+        "netOutput": "1949494",
+        "hookFee": "19959",
+        "creatorTax": "26546",
+        "beforeSqrtPriceX96": "79228083444637059845758224270",
+        "beforeTick": -1,
+        "afterSqrtPriceX96": "79228241584049438317376060983",
+        "afterTick": 0,
+        "executionGas": 134675
+      },
+      {
+        "zeroForOne": true,
+        "input": "100",
+        "grossOutput": "99",
+        "netOutput": "98",
+        "hookFee": "0",
+        "creatorTax": "1",
+        "beforeSqrtPriceX96": "79228241584049438317376060983",
+        "beforeTick": 0,
+        "afterSqrtPriceX96": "79228241576205834573415146903",
+        "afterTick": 0,
+        "executionGas": 45752
+      },
+      {
+        "zeroForOne": false,
+        "input": "1000000000",
+        "grossOutput": "997003000",
+        "netOutput": "973772831",
+        "hookFee": "9970030",
+        "creatorTax": "13260139",
+        "beforeSqrtPriceX96": "79228241576205834573415146903",
+        "beforeTick": 0,
+        "afterSqrtPriceX96": "79307311282395070382333503765",
+        "afterTick": 19,
+        "executionGas": 55170
+      }
+    ],
+    "name": "native"
+  },
+  {
+    "chainId": 143,
+    "forkBlock": 112361144,
+    "native": false,
+    "hookFeeBps": 100,
+    "creatorTaxBps": 100,
+    "liquidity": "1000000000000",
+    "lpFee": 2000,
+    "tickSpacing": 60,
+    "trades": [
+      {
+        "zeroForOne": true,
+        "input": "1000000",
+        "grossOutput": "997999",
+        "netOutput": "978041",
+        "hookFee": "9979",
+        "creatorTax": "9979",
+        "beforeSqrtPriceX96": "79228162514264337593543950336",
+        "beforeTick": 0,
+        "afterSqrtPriceX96": "79228083444637059845758224270",
+        "afterTick": -1,
+        "executionGas": 153821
+      },
+      {
+        "zeroForOne": false,
+        "input": "2000000",
+        "grossOutput": "1995999",
+        "netOutput": "1956081",
+        "hookFee": "19959",
+        "creatorTax": "19959",
+        "beforeSqrtPriceX96": "79228083444637059845758224270",
+        "beforeTick": -1,
+        "afterSqrtPriceX96": "79228241584049438317376060983",
+        "afterTick": 0,
+        "executionGas": 146640
+      },
+      {
+        "zeroForOne": true,
+        "input": "100",
+        "grossOutput": "99",
+        "netOutput": "99",
+        "hookFee": "0",
+        "creatorTax": "0",
+        "beforeSqrtPriceX96": "79228241584049438317376060983",
+        "beforeTick": 0,
+        "afterSqrtPriceX96": "79228241576205834573415146903",
+        "afterTick": 0,
+        "executionGas": 35353
+      },
+      {
+        "zeroForOne": false,
+        "input": "1000000000",
+        "grossOutput": "997003000",
+        "netOutput": "977062940",
+        "hookFee": "9970030",
+        "creatorTax": "9970030",
+        "beforeSqrtPriceX96": "79228241576205834573415146903",
+        "beforeTick": 0,
+        "afterSqrtPriceX96": "79307311282395070382333503765",
+        "afterTick": 19,
+        "executionGas": 45235
+      }
+    ],
+    "name": "rounding"
+  },
+  {
+    "chainId": 143,
+    "forkBlock": 112361144,
+    "native": false,
+    "hookFeeBps": 0,
+    "creatorTaxBps": 0,
+    "liquidity": "1000000000000",
+    "lpFee": 2000,
+    "tickSpacing": 60,
+    "trades": [
+      {
+        "zeroForOne": true,
+        "input": "1000000",
+        "grossOutput": "997999",
+        "netOutput": "997999",
+        "hookFee": "0",
+        "creatorTax": "0",
+        "beforeSqrtPriceX96": "79228162514264337593543950336",
+        "beforeTick": 0,
+        "afterSqrtPriceX96": "79228083444637059845758224270",
+        "afterTick": -1,
+        "executionGas": 62123
+      },
+      {
+        "zeroForOne": false,
+        "input": "2000000",
+        "grossOutput": "1995999",
+        "netOutput": "1995999",
+        "hookFee": "0",
+        "creatorTax": "0",
+        "beforeSqrtPriceX96": "79228083444637059845758224270",
+        "beforeTick": -1,
+        "afterSqrtPriceX96": "79228241584049438317376060983",
+        "afterTick": 0,
+        "executionGas": 54901
+      },
+      {
+        "zeroForOne": true,
+        "input": "100",
+        "grossOutput": "99",
+        "netOutput": "99",
+        "hookFee": "0",
+        "creatorTax": "0",
+        "beforeSqrtPriceX96": "79228241584049438317376060983",
+        "beforeTick": 0,
+        "afterSqrtPriceX96": "79228241576205834573415146903",
+        "afterTick": 0,
+        "executionGas": 34878
+      },
+      {
+        "zeroForOne": false,
+        "input": "1000000000",
+        "grossOutput": "997003000",
+        "netOutput": "997003000",
+        "hookFee": "0",
+        "creatorTax": "0",
+        "beforeSqrtPriceX96": "79228241576205834573415146903",
+        "beforeTick": 0,
+        "afterSqrtPriceX96": "79307311282395070382333503765",
+        "afterTick": 19,
+        "executionGas": 35096
+      }
+    ],
+    "name": "zero-fees"
+  }
+]
